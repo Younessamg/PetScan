@@ -1,5 +1,7 @@
 # PetScan 🐾
 
+![image](https://github.com/user-attachments/assets/2889161d-764d-432c-b99c-348faa72a6ea)
+
 PetScan is a mobile application designed to streamline health tracking for domestic animals. It enables pet owners to monitor vaccinations, schedule reminders, and manage overall healthcare effortlessly. The platform provides a comprehensive system for storing and managing pet health information through an intuitive interface tailored for ease of use.
 
 Our capstone project enhances PetScan by integrating AI-powered features capable of analyzing photos of animals to accurately detect health issues, such as pink eye, and providing users with real-time information. By facilitating veterinary care management and offering advanced diagnostic support, PetScan contributes to improved animal well-being and simplifies the responsibilities of pet owners.
@@ -14,6 +16,10 @@ Our capstone project enhances PetScan by integrating AI-powered features capable
 - [Contributing](#contributing)
 
 ## Software Architecture
+![WhatsApp Image 2024-12-29 at 20 18 57_d5b9bed4](https://github.com/user-attachments/assets/e80d2bb6-2e1a-40b2-b2b0-89ccacfd2c8f)
+
+![mobile_architecture 1](https://github.com/user-attachments/assets/418d5f2e-4991-4fc5-9ad2-6ce2222087f8)
+
 The application architecture uses HTML and CSS for the frontend of the web and Spring Boot and Django for the backend, with communication via an HTTP client.
 
 ## Docker Image
@@ -220,7 +226,7 @@ docker-compose up --build
 - Verify all ports are available and not in use
 
 ## Video Demonstration
-[Link to demonstration video]
+[[Link to demonstration video]](https://github.com/user-attachments/assets/07c335b0-8436-4bcf-9384-5b7bb36a77b8)
 
 ## Contributing
 We welcome contributions from everyone! Please help us make this project better.
