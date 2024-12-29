@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MapsActivity">
+
+    <!-- Barre de recherche pour la ville -->
+    <AutoCompleteTextView
+        android:id="@+id/citySearch"
+        android:layout_width="386dp"
+        android:layout_height="74dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:hint="Search for a city"
+        android:inputType="text" />
+
+    <!-- Fragment de la carte -->
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/citySearch"
+        android:layout_marginTop="10dp" />
+
+    <!-- Bouton pour les vétérinaires proches -->
+    <Button
+        android:id="@+id/btnNearbyVets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nearby Vets"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Bouton pour les vétérinaires d'urgence -->
+    <Button
+        android:id="@+id/btnEmergencyVets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Emergency Vets"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@id/btnNearbyVets"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Bouton pour les vétérinaires par ville -->
+    <Button
+        android:id="@+id/btnCityVets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vets by City"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@id/btnEmergencyVets"
+        android:layout_marginBottom="16dp" />
+
+</RelativeLayout>

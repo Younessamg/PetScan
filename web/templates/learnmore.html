@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About PetScan Only</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            padding-bottom: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 2rem;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            color: #2D3436;
+        }
+
+        .content-card p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .resources-list {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .resources-list li {
+            padding: 1rem;
+            background: rgba(78, 205, 196, 0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .resources-list li:hover {
+            background: rgba(78, 205, 196, 0.2);
+            transform: translateX(10px);
+        }
+
+        .resources-list a {
+            color: #4ECDC4;
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .resources-list a:hover {
+            color: #FF6B6B;
+        }
+
+        .footer {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-icon {
+            width: 24px;
+            height: 24px;
+            filter: brightness(0) invert(1);
+            transition: transform 0.3s ease;
+        }
+
+        .footer-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .footer-text {
+            color: white;
+            font-size: 0.875rem;
+            margin: 0;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header p {
+                font-size: 1.25rem;
+            }
+
+            .content-card {
+                padding: 1.5rem;
+            }
+
+            .resources-list li:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <p>Learn more about resources and what we do</p>
+        </div>
+
+        <div class="content-card">
+            <p>PetScan Only is a pet health diagnostic tool designed to help and assist pet owners in an immediate fashion. It provides quick testing for common conditions in dogs, including conjunctivitis, ear infections, bloating, and kennel cough. PetScan Only aims to empower pet owners with valuable information about their pet's health.</p>
+            
+            <p>For more detailed information on pet health, users are encouraged to refer to reputable sources such as:</p>
+            
+            <ul class="resources-list">
+                <li><a href="https://veterinarypartner.vin.com/default.aspx?pid=19239" target="_blank">Veterinary Partner</a></li>
+                <li><a href="https://capcvet.org/" target="_blank">CAPC (Companion Animal Parasite Council)</a></li>
+                <li><a href="https://www.avma.org/" target="_blank">AVMA (American Veterinary Medical Association)</a></li>
+                <li><a href="https://www.webmd.com/pets/default.htm" target="_blank">WebMD Pet Health Community</a></li>
+                <li><a href="https://www.aaha.org/" target="_blank">AAHA (American Animal Hospital Association)</a></li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <div class="footer-item">
+                <img src="{% static '/images/home.png' %}" alt="Home" class="footer-icon" onclick="location.href='{% url 'animals' %}">
+                <p class="footer-text">Pick a pet</p>
+            </div>
+            <div class="footer-item">
+                <img src="{% static '/images/account.png' %}" alt="Account" class="footer-icon">
+                <p class="footer-text">Account</p>
+            </div>
+            <div class="footer-item">
+                <img src="{% static '/images/resources.png' %}" alt="Resources" class="footer-icon" onclick="location.href='{% url 'learnmore' %}">
+                <p class="footer-text">Learn more</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

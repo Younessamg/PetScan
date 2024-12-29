@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Diseases</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            border-radius: 0 0 30px 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            font-size: 1.5rem;
+            margin: 0;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-weight: 500;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .pick-part {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .animals {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .animal-box {
+            background: rgba(255, 255, 255, 0.95);
+            color: #2D3436;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 200px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .animal-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer {
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .footer-icon {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
+
+        .footer-text {
+            color: white;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .animal-box {
+                width: 160px;
+                padding: 1.5rem;
+            }
+
+            .footer-text {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <p>Diagnose your cat's health</p>
+        </header>
+
+        <main class="content">
+            <div class="pick-part">
+                Pick the part of your cat you would like to diagnose.
+            </div>
+            <div class="animals">
+                <div class="animal-box" onclick="location.href='{% url 'cateyes' %}'">
+                    Eyes
+                </div>
+                <div class="animal-box" onclick="location.href='{% url 'mites' %}'">
+                    Ears
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div>
+                <img src="{% static '/images/home.png' %}" alt="Home" class="footer-icon" onclick="location.href='{% url 'animals' %}'">
+                <p class="footer-text">Home</p>
+            </div>
+            <div>
+                <img src="{% static '/images/account.png' %}" alt="Account" class="footer-icon" onclick="location.href='{% url 'account' %}'">
+                <p class="footer-text">Account</p>
+            </div>
+            <div>
+                <img src="{% static '/images/resources.png' %}" alt="Resources" class="footer-icon" onclick="location.href='{% url 'learnmore' %}'">
+                <p class="footer-text">Learn more</p>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

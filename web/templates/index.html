@@ -1,0 +1,173 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Petscan</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content-box {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            max-width: 90%;
+            width: 800px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo {
+            height: 50px;
+            position: absolute;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: transform 0.5s ease;
+        }
+
+        .images-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 4rem 0;
+            gap: 2rem;
+        }
+
+        .fade-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 20px;
+            transform: perspective(1000px) rotateY(0deg);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .fade-image:hover {
+            transform: perspective(1000px) rotateY(10deg) translateY(-10px);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: #2D3436;
+            margin: 1rem 0;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: #636E72;
+            font-weight: 400;
+        }
+
+        .background-shapes {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 10s infinite;
+        }
+
+        .shape:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            left: 10%;
+        }
+
+        .shape:nth-child(2) {
+            width: 300px;
+            height: 300px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        .fade-out {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 768px) {
+            .content-box {
+                padding: 2rem;
+                margin: 1rem;
+            }
+
+            .images-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .fade-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    
+    <div class="container">
+        <div class="content-box">
+            <div class="images-container">
+                <img src="{% static 'images/catdog.png' %}" alt="CatDog" class="fade-image" id="catDogImage">
+                <img src="{% static 'images/dogcat.png' %}" alt="DogCat" class="fade-image" id="dogCatImage">
+            </div>
+            <h1>Welcome to Petscan</h1>
+            <h2>Detect diseases quicker</h2>
+        </div>
+    </div>
+
+    <script>
+        setTimeout(function () {
+            document.getElementById('catDogImage').classList.add('fade-out');
+            document.getElementById('dogCatImage').classList.add('fade-out');
+            
+            setTimeout(function() {
+                window.location.href = "{% url 'login' %}";
+            }, 10000);
+        }, 10000);
+    </script>
+</body>
+</html>

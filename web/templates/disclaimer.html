@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petscan - Disclaimer</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #1A1A1A;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #FFFFFF;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            height: 35px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            filter: brightness(0) invert(1);
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        .small-dog {
+            width: 30px;
+            height: auto;
+            filter: brightness(0) invert(1);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+            background: radial-gradient(circle at center, #2A2A2A 0%, #1A1A1A 100%);
+        }
+
+        .disclaimer-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 600px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .disclaimer-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #E0E0E0;
+        }
+
+        .agree-button {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .agree-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .agree-button:hover::before {
+            left: 100%;
+        }
+
+        .agree-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .disclaimer-card {
+                padding: 2rem;
+                margin: 1rem;
+            }
+
+            .header {
+                padding: 0.8rem;
+            }
+
+            .logo {
+                height: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="{% static '/images/logo.png' %}" alt="Logo" class="logo" onclick="location.href='{% url 'index' %}'">
+        <img src="{% static 'images/dog.png' %}" alt="Small Dog" class="small-dog">
+        <h1>PetScan</h1>
+    </div>
+
+    <div class="main-content">
+        <div class="disclaimer-card">
+            <p>This application is not a licensed doctor, and users should use it at their own risk. For a full diagnosis,
+                consult a licensed doctor. We are not liable for any mistakes that may happen as a result of this
+                application. Artificial intelligence used in this application is for educational aid only.</p>
+            <button class="agree-button" onclick="location.href='{% url 'animals' %}'">OK, I agree</button>
+        </div>
+    </div>
+</body>
+</html>

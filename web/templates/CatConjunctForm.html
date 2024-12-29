@@ -1,0 +1,200 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conjunctivitis Form</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 60px;
+        }
+
+        .background-shapes {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 10s infinite;
+        }
+
+        .shape:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            left: 10%;
+        }
+
+        .shape:nth-child(2) {
+            width: 300px;
+            height: 300px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            border-radius: 30px;
+            margin: 2rem auto;
+            max-width: 800px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            margin: 0;
+            font-size: 1.25rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 2rem;
+            margin: 0 auto;
+            max-width: 800px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .citation {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 15px;
+            margin: 2rem auto;
+            max-width: 800px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: white;
+        }
+
+        .citation a {
+            color: white;
+            text-decoration: underline;
+            transition: opacity 0.3s ease;
+        }
+
+        .citation a:hover {
+            opacity: 0.8;
+        }
+
+        .footer {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+
+        .footer-icon {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            filter: brightness(0) invert(1);
+            transition: transform 0.3s ease;
+        }
+
+        .footer-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .footer-text {
+            color: white;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        @media (max-width: 768px) {
+            .header, .form-container, .citation {
+                margin: 1rem;
+            }
+
+            .header p {
+                font-size: 1.1rem;
+            }
+
+            .footer-text {
+                max-width: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <p>Please complete the form to diagnose your pet for Conjunctivitis</p>
+        </div>
+
+        <div class="form-container">
+            <div data-tf-widget="LpdSSGeX" data-tf-opacity="100" data-tf-iframe-props="title=Conjuctivitis"
+                data-tf-transitive-search-params data-tf-medium="snippet" style="width:100%;height:500px;">
+            </div>
+        </div>
+
+        <div class="citation">
+            All information obtained from 
+            <a href="https://veterinarypartner.vin.com/default.aspx?pid=19239&id=10517463" target="_blank" rel="noopener noreferrer">
+                Veterinary Partner
+            </a>. Visit their website for more information.
+        </div>
+
+        <div class="footer">
+            <div>
+                <img src="{% static '/images/home.png' %}" alt="Home" class="footer-icon" onclick="location.href='{% url 'animals' %}">
+                <p class="footer-text">Pick a pet</p>
+            </div>
+            <div>
+                <img src="{% static '/images/account.png' %}" alt="Account" class="footer-icon" onclick="location.href='{% url 'account' %}'">
+                <p class="footer-text">Account</p>
+            </div>
+            <div>
+                <img src="{% static '/images/resources.png' %}" alt="Resources" class="footer-icon" onclick="location.href='{% url 'learnmore' %}">
+                <p class="footer-text">Learn more</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="//embed.typeform.com/next/embed.js"></script>
+</body>
+</html>

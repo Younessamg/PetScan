@@ -1,0 +1,51 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: pet-mysql
+    environment:
+      MYSQL_DATABASE: pets
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - pet-network
+
+  app:
+    build: .
+    container_name: pet-app
+    depends_on:
+      - mysql
+    ports:
+      - "8010:8010"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/pets?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=rootpassword
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=true
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL8Dialect
+      - SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL=true
+      - APP_JWT_SECRET=404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      - APP_JWT_EXPIRATION_MS=86400000
+      - APP_UPLOAD_DIR=/app/uploads/products
+      - APP_QRCODE_STORAGE_LOCATION=/app/uploads/qrcodes/
+      - APP_QRCODE_BASE_URL=http://localhost:8000/api/pets/track/
+      - SPRING_SECURITY_USER_NAME=admin
+      - SPRING_SECURITY_USER_PASSWORD=admin
+    volumes:
+      - app_uploads:/app/uploads
+    networks:
+      - pet-network
+
+volumes:
+  mysql_data:
+  app_uploads:
+
+networks:
+  pet-network:
+    driver: bridge
