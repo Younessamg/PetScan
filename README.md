@@ -1,34 +1,26 @@
-# PetScan
+# PetScan 🐾
 
-PetScan is a mobile application designed to streamline health tracking for domestic animals. It enables pet owners to monitor vaccinations, schedule reminders, and manage overall healthcare effortlessly. Our platform provides a comprehensive system for storing and managing pet health information through an intuitive interface tailored for ease of use.
+PetScan is a mobile application designed to streamline health tracking for domestic animals. It enables pet owners to monitor vaccinations, schedule reminders, and manage overall healthcare effortlessly. The platform provides a comprehensive system for storing and managing pet health information through an intuitive interface tailored for ease of use.
 
-Our capstone project enhances PetScan by integrating **AI-powered features** capable of analyzing photos of animals to accurately detect health issues, such as pink eye, and providing users with real-time information. By facilitating veterinary care management and offering advanced diagnostic support, PetScan contributes to improved animal well-being and simplifies the responsibilities of pet owners.
-
----
+Our capstone project enhances PetScan by integrating AI-powered features capable of analyzing photos of animals to accurately detect health issues, such as pink eye, and providing users with real-time information. By facilitating veterinary care management and offering advanced diagnostic support, PetScan contributes to improved animal well-being and simplifies the responsibilities of pet owners.
 
 ## Table of Contents
 - [Software Architecture](#software-architecture)
 - [Docker Image](#docker-image)
-- [Technologies Used](#technologies-used)
-- [Backend Project Structure](#backend-project-structure)
-- [Dependencies](#dependencies)
+- [Frontend](#frontend)
+- [Backend](#backend)
 - [Getting Started](#getting-started)
 - [Video Demonstration](#video-demonstration)
 - [Contributing](#contributing)
 
----
-
 ## Software Architecture
-The application architecture consists of:
-- **Frontend:** HTML and CSS for the web interface.
-- **Backend:** Spring Boot and Django for server-side logic.
-- **Communication:** HTTP client for communication between frontend and backend.
-
----
+The application architecture uses HTML and CSS for the frontend of the web and Spring Boot and Django for the backend, with communication via an HTTP client.
 
 ## Docker Image
-### Backend:
+
+### Backend Docker Configuration
 ```yaml
+# docker-compose.yml
 version: '3.8'
 
 services:
@@ -53,11 +45,20 @@ services:
     ports:
       - "8010:8010"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/pets?createDatabaseIfNotExist=true
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: rootpassword
-      SPRING_SECURITY_USER_NAME: admin
-      SPRING_SECURITY_USER_PASSWORD: admin
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/pets?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=rootpassword
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=true
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL8Dialect
+      - SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL=true
+      - APP_JWT_SECRET=404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      - APP_JWT_EXPIRATION_MS=86400000
+      - APP_UPLOAD_DIR=/app/uploads/products
+      - APP_QRCODE_STORAGE_LOCATION=/app/uploads/qrcodes/
+      - APP_QRCODE_BASE_URL=http://localhost:8000/api/pets/track/
+      - SPRING_SECURITY_USER_NAME=admin
+      - SPRING_SECURITY_USER_PASSWORD=admin
     volumes:
       - app_uploads:/app/uploads
     networks:
@@ -70,9 +71,10 @@ volumes:
 networks:
   pet-network:
     driver: bridge
-Frontend:
-yaml
-Copy code
+```
+
+### Frontend Docker Configuration
+```yaml
 version: '3.8'
 
 services:
@@ -89,91 +91,141 @@ services:
     ports:
       - "8000:8000"
     environment:
-      DEBUG: 1
-      DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1
-      SECRET_KEY: django-insecure-key
+      - DEBUG=1
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1
+      - SECRET_KEY=django-insecure-oe9!^5%r*mis@8s))wz0(y^qq#^re+#hgmdxx*0m4g9q_ytyfp
 
 volumes:
   static_volume:
   media_volume:
-Technologies Used
-Web Frontend:
-HTML
-CSS
-Python
-Django
-Mobile:
-Kotlin
-Retrofit
-Backend:
-Spring Boot
-MySQL
-Backend Project Structure
-ma.ensa.pet.config: Configuration files for Spring Boot.
-ma.ensa.pet.controller: RESTful APIs to handle HTTP requests and responses.
-ma.ensa.pet.model: Data entities with JPA annotations.
-ma.ensa.pet.repository: Interfaces for database operations using Spring Data JPA.
-ma.ensa.pet.dto: Data Transfer Objects for API communication.
-ma.ensa.pet.exception: Custom exceptions and global error handling.
-ma.ensa.pet.security: JWT-based authentication and authorization.
-ma.ensa.pet.service: Business logic operations.
-Dependencies
-Spring Data JPA:
-xml
-Copy code
+```
+
+## Technologies Used
+
+### Web Frontend
+- HTML
+- CSS
+- Python
+- Django
+
+### Mobile Frontend
+- Kotlin
+- Retrofit
+
+### Backend
+- Spring Boot
+- MySQL
+
+## Backend Project Structure
+
+### 1. `ma.ensa.pet.config`
+- Purpose: Contains configuration files and setup classes for the Spring Boot application.
+
+### 2. `ma.ensa.pet.controller`
+- Purpose: Handles incoming HTTP requests and responses
+- Key Components:
+  - Controller Classes for RESTful APIs
+  - Request parsing and response handling
+  - Service layer interaction
+
+### 3. `ma.ensa.pet.model`
+- Purpose: Data entity representation
+- Key Components:
+  - JPA annotated entity classes
+  - Database table mappings
+  - Relationship definitions
+
+### 4. `ma.ensa.pet.repository`
+- Purpose: Database operation abstraction
+- Key Components:
+  - JPA repository interfaces
+  - CRUD operation methods
+  - Custom query definitions
+
+### 5. `ma.ensa.pet.dto`
+- Purpose: Data Transfer Objects
+- Key Components:
+  - API request/response structures
+  - Data mapping classes
+
+### 6. `ma.ensa.pet.exception`
+- Purpose: Exception handling
+- Key Components:
+  - Custom exception classes
+  - Global exception handler
+
+### 7. `ma.ensa.pet.security`
+- Purpose: Application security management
+- Key Components:
+  - JWT authentication
+  - Endpoint security configuration
+  - Role-based access control
+
+### 8. `ma.ensa.pet.service`
+- Purpose: Business logic implementation
+- Key Components:
+  - Service layer classes
+  - Business rule implementation
+  - Repository interaction
+
+## Dependencies
+
+### Core Dependencies
+```xml
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-data-jpa</artifactId>
 </dependency>
-MySQL Connector/J:
-xml
-Copy code
 <dependency>
     <groupId>mysql</groupId>
     <artifactId>mysql-connector-java</artifactId>
     <scope>runtime</scope>
 </dependency>
-Getting Started
-Prerequisites
-Git: Install from git-scm.com.
-Docker: Install from docker.com.
-Django: Install using npm install Django.
-Project Setup
-Step 1: Clone the Repository
-bash
-Copy code
+```
+
+## Getting Started
+
+### Prerequisites
+1. Git (Download from [git-scm.com](https://git-scm.com))
+2. Docker and Docker Compose (Download from [docker.com](https://docker.com))
+3. Django (Install via `npm install Django`)
+
+### Project Setup
+
+#### Step 1: Clone the Repository
+```bash
 git clone <repository_url>
 cd <project_folder>
-Step 2: Backend Setup (Spring Boot and MySQL)
-Configure Docker Compose:
-Ensure docker-compose.yml is properly configured for backend services.
-Start Backend Services:
-bash
-Copy code
-docker-compose up --build
-Verify the Backend:
-Access: http://localhost:8010
-Step 3: Web Frontend Setup (Django)
-Configure the Django Environment:
-Ensure the environment variables in docker-compose.yml are set.
-Run Frontend Services:
-bash
-Copy code
-docker-compose up --build
-Verify the Web Frontend:
-Access: http://localhost:8000
-Video Demonstration
-Click here to watch the demonstration
+```
 
-Contributing
-We welcome contributions to enhance PetScan! Please follow these steps:
+#### Step 2: Backend Setup (Spring Boot and MySQL)
+1. Configure Docker Compose file
+2. Start backend services:
+```bash
+docker-compose up --build
+```
+3. Verify backend at `http://localhost:8010`
 
-Fork the repository.
-Create a feature branch.
-Submit a pull request.
-Contributors
-Younes Amerga (GitHub)
-Mohammed Aziz (GitHub)
-Mohamed Lachgar (ResearchGate)
-lua
-Copy code
+#### Step 3: Web Frontend Setup (Django)
+1. Configure environment variables
+2. Start frontend services:
+```bash
+docker-compose up --build
+```
+3. Verify frontend at `http://localhost:8000`
+
+### Troubleshooting Tips
+- Use `docker-compose logs -f` for monitoring
+- Check Docker permissions if encountering access issues
+- Verify all ports are available and not in use
+
+## Video Demonstration
+[Link to demonstration video]
+
+## Contributing
+We welcome contributions from everyone! Please help us make this project better.
+
+### Contributors
+- Younes Amerga ([GitHub](https://github.com/Younessamg))
+- Mohammed Aziz ([GitHub](https://github.com/))
+- Mohamed Lachgar ([ResearchGate](https://www.researchgate.net/))
