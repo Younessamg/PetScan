@@ -234,4 +234,4 @@ We welcome contributions from everyone! Please help us make this project better.
 ### Contributors
 - Younes Amerga ([GitHub](https://github.com/Younessamg))
 - Mohammed Aziz ([GitHub](https://github.com/aziz-laravel))
-- Mohamed Lachgar ([ResearchGate](https://www.researchgate.net/))
+- Mohamed Lachgar ([ResearchGate](https://github.com/lachgar))
